@@ -1,5 +1,4 @@
 <?php
-
 namespace app\controllers;
 
 use Yii;
@@ -9,6 +8,8 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\RegForm;
+use yii\helpers\Url;
 
 class SiteController extends Controller
 {
@@ -124,5 +125,22 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    public function actionReg()
+    {
+        $model = new RegForm();
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            if ($user = $model->reg()) {
+                if (Yii::$app->getUser()->login($user)) {
+                    return $this->redirect(Url::to(['/']));
+                }
+            }
+
+            return $this->goBack();
+        }
+
+        return $this->render('reg', ['model' => $model]);
     }
 }
