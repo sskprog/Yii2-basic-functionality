@@ -62,6 +62,11 @@ $config = [
                     'suffix' => ''
                 ],
                 [
+                    'pattern' => 'lk/post/<action:\w+>/',
+                    'route' => 'lk/post/<action>',
+                    'suffix' => ''
+                ],
+                [
                     'pattern' => 'lk/post/<action:\w+>/<id:\d+>',
                     'route' => 'lk/post/<action>',
                     'suffix' => ''
