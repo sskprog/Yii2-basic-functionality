@@ -5,9 +5,9 @@ $this->title = Html::encode($model->title);
 ?>
 
 <h2 class="page-header"><?= Html::encode($model->title) ?> </h2>
-<p><em><?=Yii::$app->formatter->asDate($model->created_at, 'php:d.m.Y')?></em></p>
+<div><em><?=Yii::$app->formatter->asDate($model->created_at, 'php:d.m.Y')?></em></div>
 <?php if ($author):?>
-<p><i><?=$author->fullname; ?> </i></p>
+    <div><?php echo Html::a($model->user->fullname, ['user', 'id' => $model->user_id]); ?></div>    
 <?php endif; ?>
 
 <?= $model->body; ?>
