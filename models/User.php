@@ -11,6 +11,11 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
         return 'users';
     }
 
+    public function getPosts()
+    {
+        return $this->hasMany(Posts::class, ['user_id' => 'id']);
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -72,7 +77,9 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
     {
         return Yii::$app->security->validatePassword($password, $this->password);
     }
-    public function setPassword($password){
+
+    public function setPassword($password)
+    {
         $this->password = Yii::$app->security->generatePasswordHash($password);
     }
 
