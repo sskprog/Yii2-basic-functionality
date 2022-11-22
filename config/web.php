@@ -13,6 +13,11 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm' => '@vendor/npm-asset',
     ],
+    'modules' => [
+        'lk' => [
+            'class' => 'app\modules\lk\Module',
+        ],
+    ],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -51,6 +56,16 @@ $config = [
             'showScriptName' => false,
             'enableStrictParsing' => true,
             'rules' => [
+                [
+                    'pattern' => 'lk/',
+                    'route' => 'lk/default',
+                    'suffix' => ''
+                ],
+                [
+                    'pattern' => 'lk/<action:\w+>',
+                    'route' => 'lk/default/action',
+                    'suffix' => ''
+                ],
 
                 [
                     'pattern' => 'post/<action:\w+>/<id:\d+>',
