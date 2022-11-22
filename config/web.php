@@ -49,25 +49,28 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'enableStrictParsing' => true,
             'rules' => [
+
                 [
-                    'pattern' => '',
-                    'route' => 'site/index',
-                    'suffix' => ''
-                ],
-                [
-                    'pattern' => 'post/',
-                    'route' => 'post/index',
-                    'suffix' => ''
-                ],
-                [
-                    'pattern' => 'post/<action:\w+>',
+                    'pattern' => 'post/<action:\w+>/<id:\d+>',
                     'route' => 'post/<action>',
                     'suffix' => ''
                 ],
                 [
+                    'pattern' => 'posts/',
+                    'route' => 'post/index',
+                    'suffix' => ''
+                ],
+
+                [
                     'pattern' => '<action:\w+>',
                     'route' => 'site/<action>',
+                    'suffix' => ''
+                ],
+                [
+                    'pattern' => '',
+                    'route' => 'site/index',
                     'suffix' => ''
                 ],
 
