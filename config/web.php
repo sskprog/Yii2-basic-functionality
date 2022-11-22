@@ -58,12 +58,12 @@ $config = [
             'rules' => [
                 [
                     'pattern' => 'lk/',
-                    'route' => 'lk/default',
+                    'route' => 'lk/post',
                     'suffix' => ''
                 ],
                 [
-                    'pattern' => 'lk/<action:\w+>',
-                    'route' => 'lk/default/action',
+                    'pattern' => 'lk/post/<action:\w+>/<id:\d+>',
+                    'route' => 'lk/post/<action>',
                     'suffix' => ''
                 ],
 
