@@ -1,9 +1,9 @@
 <?php
-
 namespace app\modules\lk\controllers;
 
 use app\models\Posts;
 use app\models\PostsSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -13,6 +13,14 @@ use yii\filters\VerbFilter;
  */
 class PostController extends Controller
 {
+    public function init()
+    {
+        parent::init();
+        if (Yii::$app->user->getIsGuest()) {
+            return $this->redirect('/login');
+        }
+    }
+
     /**
      * @inheritDoc
      */
