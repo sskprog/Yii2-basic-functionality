@@ -41,17 +41,18 @@ class PostController extends Controller
 
     public function actionUser($id)
     {
-        var_dump($id);
-        die;
-        $model = Posts::findOne(['id' => $id]);
+        $query = Posts::find()
+        ->joinWith('user')
+        ->where(['is_published' => 1])
+        ->where(['user_id' => $id])
+        ->orderBy(['created_at' => SORT_DESC]);
 
-        if ($model) {
-            $author = User::findOne(['id' => $model->user_id]);
-            return $this->render('view', [
-                'model' => $model, 'author' => $author
-            ]);
-        } else {
-            throw new HttpException(404, 'Страница не найдена');
-        }
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 3,
+            ],
+        ]);
+        return $this->render('index', ['dataProvider' => $dataProvider]);
     }
 }
