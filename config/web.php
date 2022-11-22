@@ -56,6 +56,16 @@ $config = [
                     'suffix' => ''
                 ],
                 [
+                    'pattern' => 'post/',
+                    'route' => 'post/index',
+                    'suffix' => ''
+                ],
+                [
+                    'pattern' => 'post/<action:\w+>',
+                    'route' => 'post/<action>',
+                    'suffix' => ''
+                ],
+                [
                     'pattern' => '<action:\w+>',
                     'route' => 'site/<action>',
                     'suffix' => ''
