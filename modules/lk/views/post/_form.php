@@ -10,17 +10,16 @@ use yii\widgets\ActiveForm;
 
 <div class="posts-form">
 
-    <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'user_id')->textInput() ?>
+    <?php $form = ActiveForm::begin(); ?>    
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'body')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'is_published')->textInput() ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
+    <?= $form->field($model, 'is_published')->dropDownList([
+        '0' => 'Черновик',
+        '1' => 'Опубликовано',
+    ]) ?>    
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
