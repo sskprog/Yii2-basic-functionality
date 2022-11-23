@@ -1,10 +1,9 @@
 <?php
-
 namespace app\models;
 
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Posts;
 
 /**
  * PostsSearch represents the model behind the search form of `app\models\Posts`.
@@ -40,7 +39,7 @@ class PostsSearch extends Posts
      */
     public function search($params)
     {
-        $query = Posts::find();
+        $query = Posts::find()->where(['user_id' => Yii::$app->user->identity->id]);
 
         // add conditions that should always apply here
 
