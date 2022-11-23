@@ -1,15 +1,16 @@
 <?php
 
 use yii\helpers\Html;
+use yii\web\YiiAsset;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
 /** @var app\models\Posts $model */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Записи', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-\yii\web\YiiAsset::register($this);
+YiiAsset::register($this);
 ?>
 <div class="posts-view">
 
@@ -29,11 +30,17 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'user_id',
+            //'id',
+            //'user_id',
             'title',
             'body:ntext',
-            'is_published',
+            [
+                'attribute' => 'is_published',
+                'format' => 'raw',
+                'value' => function ($data) {
+                    return $data->created_at ? '<span class="text-success">Опубликовано</span>' : '<span class="text-danger">Черновик</span>';
+                }
+            ],
             'created_at',
         ],
     ]) ?>
