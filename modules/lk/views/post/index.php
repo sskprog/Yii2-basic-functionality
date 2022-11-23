@@ -5,12 +5,13 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use yii\helpers\StringHelper;
 
 /** @var yii\web\View $this */
 /** @var app\models\PostsSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Posts';
+$this->title = 'Записи';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="posts-index">
@@ -18,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Posts', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]);?>
@@ -32,8 +33,45 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id',
             // 'user_id',
             'title',
-            'body:ntext',
-            'is_published',
+            [
+                'attribute' => 'body',
+                'value' => function ($model) {
+                    return StringHelper::truncate($model->body, 250);
+                }
+            ],
+            //'body:ntext',
+            //'is_published',
+
+            [
+                'attribute' => 'is_published',
+                'format' => 'raw',
+                'headerOptions' => ['width' => '160'],
+                'filter' => [
+                    0 => 'Черновик',
+                    1 => 'Опубликовано',
+                ],
+                'value' => function ($model, $key, $index, $column) {
+                    $active = $model->{$column->attribute};
+                    if (!$active) {
+                        return Html::tag(
+                            'span',
+                            'Черновик',
+                            [
+                                'class' => 'badge bg-danger',
+                            ]
+                        );
+                    } else {
+                        return Html::tag(
+                            'span',
+                            'Опубликовано',
+                            [
+                                'class' => 'badge bg-success',
+                            ]
+                        );
+                    }
+                },
+            ],
+
             'created_at',
             [
                 'class' => ActionColumn::class,
