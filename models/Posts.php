@@ -1,6 +1,8 @@
 <?php
 namespace app\models;
 
+use Yii;
+
 /**
  * This is the model class for table "posts".
  *
@@ -33,8 +35,10 @@ class Posts extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'is_published'], 'integer'],
+            [['user_id'], 'default', 'value' => Yii::$app->user->identity->id],
             [['body'], 'string'],
             [['created_at'], 'safe'],
+            [['created_at'], 'default', 'value' => date('Y-m-d H:i:s')],
             [['title'], 'string', 'max' => 255],
         ];
     }
@@ -47,10 +51,10 @@ class Posts extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'user_id' => 'User ID',
-            'title' => 'Title',
-            'body' => 'Body',
-            'is_published' => 'Is Published',
-            'created_at' => 'Created At',
+            'title' => 'Заголовок',
+            'body' => 'Текст',
+            'is_published' => 'Статус',
+            'created_at' => 'Дата',
         ];
     }
 }
