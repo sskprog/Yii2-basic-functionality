@@ -1,17 +1,18 @@
-# Yii2
-#### Для незарегистрированных пользователей
-- регистрация с подверждением пароля
-- просмотр всех записей
-- просмотр отдельной записи
-- просмотр записей определенного пользователя
-- верстки и дизайна нет
+# Yii2 basic functionality
 
-#### Личный кабинет
-- вход только для зарегистрированных пользователей (редирект на форму авторизации)
-- создание, редактирование, просмотр, удаление своих записей
+#### For unregistered users
+- registration with password confirmation
+- view all posts
+- view a single post
+- view posts of a specific user
+- simple Bootstrap design
 
-#### Настройки
-- база данных SQLite (в корне сайта)
-- настроены ЧПУ
-- логины пользователей с записями (admin, user, test). Все пароли 123456.
+#### Personal Area
+- login only for registered users (redirect to the authorization form)
+- create, edit, view, delete your posts
+
+#### Settings
+- database SQLite
+- configured human readable URL
+- usernames with posts (admin, user, test). All passwords are 123456.
 
