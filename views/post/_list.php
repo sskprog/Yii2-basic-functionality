@@ -6,7 +6,7 @@ use yii\helpers\StringHelper;
 
 ?>
 
-<div class="card">
+<div class="card mb-4">
     <div class="card-body">
         <h2 class="card-title"><?= Html::encode($model->title) ?></h2>
         <div class="card-text"><?php echo Html::a($model->user->fullname, ['user', 'id' => $model->user_id]); ?>
@@ -19,4 +19,3 @@ use yii\helpers\StringHelper;
             endif ?>
     </div>
 </div>
-<p></p>
